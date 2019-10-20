@@ -1,0 +1,14 @@
+.cell {
+  height: 30px;
+  width: 30px;
+  &.cell-t {
+    background: url("trash.svg");
+    background-size: contain;
+  }
+  &.cell-w {
+    background-color: black;
+  }
+  &.cell-e {
+    background-color: white;
+  }
+}

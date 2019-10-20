@@ -1,0 +1,7 @@
+<div class="grid">
+  <div *ngFor="let row of schema" class="row">
+    <div *ngFor="let cell of row">
+      <app-map-cell [(cell)]="cell"></app-map-cell>
+    </div>
+  </div>
+</div>
