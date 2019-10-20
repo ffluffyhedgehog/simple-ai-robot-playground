@@ -1,7 +1,13 @@
+:host {
+  display: flex;
+  & > * {
+    margin-right: 15px;
+  }
+}
 .grid {
   display: flex;
   flex-direction: column;
-  border: 30px solid black;
+  border: 40px solid black;
   width: fit-content;
 }
 

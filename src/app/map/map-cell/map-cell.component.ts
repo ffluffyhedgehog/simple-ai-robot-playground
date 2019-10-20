@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MapCellType } from '../map.model';
+import { MapCellType } from '../../map.model';
 
 @Component({
   selector: 'app-map-cell',
@@ -8,6 +8,7 @@ import { MapCellType } from '../map.model';
 })
 export class MapCellComponent implements OnInit {
   @Input() cell: MapCellType;
+  @Input() isRobot: boolean;
   @Output() cellChange = new EventEmitter<MapCellType>();
 
   constructor() { }
@@ -17,19 +18,16 @@ export class MapCellComponent implements OnInit {
 
   cellClick() {
     if (this.cell === 'w') {
-      this.cell = 'e';
       this.cellChange.emit('e');
       return;
     }
 
     if (this.cell === 'e') {
-      this.cell = 't';
       this.cellChange.emit('t');
       return;
     }
 
     if (this.cell === 't') {
-      this.cell = 'w';
       this.cellChange.emit('w');
       return;
     }

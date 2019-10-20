@@ -1,6 +1,7 @@
 .cell {
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
+  border: 1px solid black;
   &.cell-t {
     background: url("trash.svg");
     background-size: contain;
@@ -10,5 +11,33 @@
   }
   &.cell-e {
     background-color: white;
+  }
+  &.cell-r {
+    background: url("robot.svg");
+    background-size: contain;
+  }
+
+  &.trashbot {
+    position: relative;
+
+    .cell-inner-robot {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 20px;
+      width: 20px;
+      background: url("robot.svg");
+      background-size: contain;
+    }
+
+    .cell-inner-trash {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 20px;
+      width: 20px;
+      background: url("trash.svg");
+      background-size: contain;
+    }
   }
 }
