@@ -62,7 +62,6 @@ export class ModelBasedReflexAgent implements Agent {
 
     if (possibleActions.length) {
       this.pEnergySpent++;
-      console.log(possibleActions, _.minBy(possibleActions, 'destination.lastVisited'));
       return _.minBy(possibleActions, 'destination.lastVisited').action;
     } else {
       return Action.Idle;

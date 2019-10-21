@@ -1,7 +1,17 @@
-Width: <input type="number" [(ngModel)]="width">
-Height: <input type="number" [(ngModel)]="height">
-<button (click)="newScheme()">Create new field</button>
-<div *ngFor="let schema of schemas; let i = index">
-    <button (click)="deleteScheme(i)">Delete this field</button>
-    <app-map [schema]="schema"></app-map>
+<div>
+    <button (click)="runExperiments()">Run experiments on current schemes</button>
+    <input type="checkbox" [checked]="runSilently" (change)="runSilently = !runSilently"/> Run silently
+</div>
+<div>
+    Width: <input type="number" [(ngModel)]="width">
+    Height: <input type="number" [(ngModel)]="height">
+    <button (click)="newScheme()">Create new field</button>
+    <div *ngFor="let schema of schemas; let i = index">
+        <button (click)="deleteScheme(i)">Delete this field</button>
+        <app-map [verbose]="!runSilently" [schema]="schema" showControls="true"></app-map>
+        <app-experiment-results
+                *ngIf="experimentResults && experimentResults[i]"
+                [experimentResult]="experimentResults[i]"
+        ></app-experiment-results>
+    </div>
 </div>

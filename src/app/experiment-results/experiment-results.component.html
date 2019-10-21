@@ -1,0 +1,7 @@
+<app-results-table
+          *ngFor="let agent of agentNames"
+          [agentName]="agent"
+          [experiments]="experimentsByAgentName(agent)"
+          [simulationLengths]="experimentResult.simulationLengths"
+          [trashChances]="experimentResult.trashChances"
+></app-results-table>

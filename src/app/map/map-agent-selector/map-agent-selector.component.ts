@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Agent } from '../../map.model';
 import { RandomReflexAgent } from '../../agents/random-reflex-agent';
 import { SimpleReflexAgent } from '../../agents/simple-reflex-agent';
@@ -12,6 +12,8 @@ type Agents = 'random' | 'simple' | 'model-based';
   styleUrls: ['./map-agent-selector.component.scss']
 })
 export class MapAgentSelectorComponent implements AfterViewInit {
+  @Input() realAgent = 'random';
+
   agent: Agents = 'random';
   @Output() newAgent = new EventEmitter<Agent>();
 

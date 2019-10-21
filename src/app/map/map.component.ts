@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Action, Agent, MapCellType, MapSchema, Place } from '../map.model';
+import { Action, Agent, MapCellType, MapExperimentResult, MapSchema, MapSimulationJob, MapSimulationResult, Place } from '../map.model';
 import { countTrashness, getCell, processAction, selectNewAgentLocation, spawnTrash } from '../util/schema.util';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-map',
@@ -9,6 +10,8 @@ import { countTrashness, getCell, processAction, selectNewAgentLocation, spawnTr
 })
 export class MapComponent implements OnInit {
   @Input() schema: MapSchema;
+  @Input() showControls: boolean;
+  @Input() verbose: boolean;
   agent: Agent;
   agentLoc: Place;
   autoMove: boolean;
@@ -22,6 +25,10 @@ export class MapComponent implements OnInit {
   lastTenActions: {action: Action, bumped: boolean, cleanSuccess: boolean}[];
   trashCounts: number[];
   avgTrashness: number;
+
+  simRunning = false;
+
+  autoMoveBS = new BehaviorSubject<boolean>(false);
 
   constructor() { }
 
@@ -68,7 +75,47 @@ export class MapComponent implements OnInit {
       } else {
         setTimeout(() => this.cycle(), this.autoMoveSpeed);
       }
+    } else {
+      this.autoMoveBS.next(false);
     }
+  }
+
+  runJobs(jobs: MapSimulationJob[]): Observable<MapSimulationResult[]> {
+    return new Observable((observer) => {
+      this.autoMove = false;
+      this.simRunning = true;
+
+      const results: MapSimulationResult[] = [];
+      let lastJob: MapSimulationJob = null;
+
+      const sub = this.autoMoveBS
+        .subscribe(running => {
+          if (!running) {
+            if (lastJob) {
+              results.push({
+                avgTrashness: this.avgTrashness,
+                energySpent: this.agent.energySpent,
+                ...lastJob
+              });
+            }
+            if (!jobs.length) {
+              sub.unsubscribe();
+              observer.next(results);
+              observer.complete();
+              this.simRunning = false;
+              return;
+            }
+            lastJob = jobs.pop();
+            this.ultrafastAutomove = true;
+            this.autoMove = true;
+            this.schema = lastJob.schema;
+            this.ultrafastAutomoveUntil = lastJob.simulationLength;
+            this.agentChange(new lastJob.agentConstructor());
+            this.trashProbabilityPercent = lastJob.trashChance;
+            this.cycle();
+          }
+        });
+    });
   }
 
   updateTrashness() {
@@ -87,6 +134,8 @@ export class MapComponent implements OnInit {
 
   toggleAutomove() {
     this.autoMove = !this.autoMove;
+
+    this.autoMoveBS.next(this.autoMove);
 
     if (this.autoMove) {
       this.cycle();

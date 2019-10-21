@@ -1,0 +1,17 @@
+<p>
+  {{agentName}}
+</p>
+<table>
+  <tr>
+    <td></td>
+    <td *ngFor="let simLen of simulationLengths">{{simLen}}</td>
+  </tr>
+  <tr *ngFor="let trashChan of trashChances">
+    <td>{{trashChan}}</td>
+    <td *ngFor="let simLen of simulationLengths">
+      <ng-container *ngIf="pluckData(simLen, trashChan) as data">
+        {{data.energySpent}}/{{data.avgTrashness.toFixed(4)}}
+      </ng-container>
+    </td>
+  </tr>
+</table>

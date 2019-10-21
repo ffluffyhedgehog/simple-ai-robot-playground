@@ -1,35 +1,37 @@
-<div class="grid">
+<div class="grid" *ngIf="verbose">
   <div *ngFor="let row of schema; let top = index" class="row">
     <div *ngFor="let cell of row; let left = index">
       <app-map-cell [cell]="cell" (cellChange)="changeCell($event, top, left)" [isRobot]="top === agentLoc?.top && left === agentLoc?.left"></app-map-cell>
     </div>
   </div>
 </div>
-<app-map-agent-selector (newAgent)="agentChange($event)"></app-map-agent-selector>
-<div>
-  <p>Probability of new trash emerging, 0-100%, {{trashProbabilityPercent}}%</p>
-  <input type="range" [(ngModel)]="trashProbabilityPercent">
-  <p *ngIf="avgTrashness">Average trashness: {{avgTrashness.toFixed(3)}}</p>
-</div>
-<div>
-  <p>Steps made: {{steps}}</p>
-  <p>Agent energy spent: {{agent?.energySpent}}</p>
-  <p><button (click)="move()" [disabled]="autoMove">Next step</button></p>
+<div class="controls">
+  <app-map-agent-selector [realAgent]="agent" (newAgent)="agentChange($event)"></app-map-agent-selector>
+  <div>
+    <p>Probability of new trash emerging, 0-100%, {{trashProbabilityPercent}}%</p>
+    <input type="range" [(ngModel)]="trashProbabilityPercent">
+    <p *ngIf="avgTrashness">Average trashness: {{avgTrashness.toFixed(3)}}</p>
+  </div>
+  <div>
+    <p>Steps made: {{steps}}</p>
+    <p>Agent energy spent: {{agent?.energySpent}}</p>
+    <p><button (click)="move()" [disabled]="autoMove">Next step</button></p>
 
-  <p *ngIf="!ultrafastAutomove">Automove speed: {{autoMoveSpeed}}ms</p>
-  <p *ngIf="!ultrafastAutomove"><input type="range" [(ngModel)]="autoMoveSpeed" min="100" max="1500" step="100"></p>
+    <p *ngIf="!ultrafastAutomove">Automove speed: {{autoMoveSpeed}}ms</p>
+    <p *ngIf="!ultrafastAutomove"><input type="range" [(ngModel)]="autoMoveSpeed" min="100" max="1500" step="100"></p>
 
-  <p><button (click)="toggleAutomove()">{{autoMove ? 'Disable Automove' : 'Enable Automove'}}</button></p>
+    <p><button (click)="toggleAutomove()">{{autoMove ? 'Disable Automove' : 'Enable Automove'}}</button></p>
 
-  <p>Ultrafast automove<input type="checkbox" [checked]="ultrafastAutomove" (change)="ultrafastAutomove = !ultrafastAutomove"/></p>
-  <p *ngIf="ultrafastAutomove"><input type="number" [(ngModel)]="ultrafastAutomoveUntil"></p>
-</div>
+    <p>Ultrafast automove<input type="checkbox" [checked]="ultrafastAutomove" (change)="ultrafastAutomove = !ultrafastAutomove"/></p>
+    <p *ngIf="ultrafastAutomove"><input type="number" [(ngModel)]="ultrafastAutomoveUntil"></p>
+  </div>
 
-<div>
-  <p *ngFor="let action of lastTenActions">
-    {{possibleActions[action.action]}}
-    <span *ngIf="action.bumped">Bumped</span>
-    <span *ngIf="action.action === possibleActions.Clean && action.cleanSuccess">Real</span>
-    <span *ngIf="action.action === possibleActions.Clean && !action.cleanSuccess">False</span>
-  </p>
+  <div *ngIf="verbose">
+    <p *ngFor="let action of lastTenActions">
+      {{possibleActions[action.action]}}
+      <span *ngIf="action.bumped">Bumped</span>
+      <span *ngIf="action.action === possibleActions.Clean && action.cleanSuccess">Real</span>
+      <span *ngIf="action.action === possibleActions.Clean && !action.cleanSuccess">False</span>
+    </p>
+  </div>
 </div>

@@ -1,3 +1,5 @@
+import { AgentConstructor } from './agents/agentConstructor';
+
 export type MapCellType = 'w' | 'e' | 't';
 
 export type MapSchema = MapCellType[][];
@@ -19,4 +21,22 @@ export enum Action {
   Down,
   Idle,
   Clean,
+}
+
+export interface MapSimulationJob {
+  agentConstructor: AgentConstructor;
+  trashChance: number;
+  simulationLength: number;
+  schema: MapSchema;
+}
+
+export interface MapSimulationResult extends MapSimulationJob {
+  avgTrashness: number;
+  energySpent: number;
+}
+
+export interface MapExperimentResult {
+  experiments: MapSimulationResult[];
+  simulationLengths: number[];
+  trashChances: number[];
 }

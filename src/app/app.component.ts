@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { MapSchema } from './map.model';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { MapExperimentResult, MapSchema, MapSimulationJob } from './map.model';
+import { MapComponent } from './map/map.component';
+import { agents } from './agents/agentConstructor';
+import { forkJoin } from 'rxjs';
+
 
 @Component({
   selector: 'app-root',
@@ -7,8 +11,12 @@ import { MapSchema } from './map.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  @ViewChildren(MapComponent) mapComponents: QueryList<MapComponent>;
   width = 9;
   height = 9;
+  runSilently = false;
+
+  experimentResults: MapExperimentResult[];
 
   schemas: MapSchema[] = [[
     ['t', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'],
@@ -41,7 +49,6 @@ export class AppComponent implements OnInit {
   }
 
   newScheme() {
-    console.log(this.height, this.width)
     const schema = new Array(this.height).fill([]);
     schema.forEach((_, i) => {
       schema[i] = new Array(this.width).fill('e');
@@ -52,5 +59,40 @@ export class AppComponent implements OnInit {
 
   deleteScheme(index: number) {
     this.schemas.splice(index, 1);
+  }
+
+  runExperiments() {
+    const trashChances = [2, 5, 10, 15, 20];
+    const simulationLengths = [100, 500, 1000];
+    // const trashChances = [2, 5];
+    // const simulationLengths = [100, 500];
+
+    const resultObservables = this.mapComponents.map(map => {
+      const mapJobs: MapSimulationJob[] = [];
+
+      agents.forEach(agentConstructor => {
+        trashChances.forEach(trashChance => {
+          simulationLengths.forEach(simulationLength => {
+            mapJobs.push({
+              agentConstructor,
+              trashChance,
+              simulationLength,
+              schema: JSON.parse(JSON.stringify(map.schema)),
+            });
+          });
+        });
+      });
+
+      return map.runJobs(mapJobs);
+    });
+
+    forkJoin(resultObservables)
+      .subscribe(results => {
+        this.experimentResults = results.map(experiments => ({
+          experiments,
+          trashChances,
+          simulationLengths,
+        }));
+      });
   }
 }
