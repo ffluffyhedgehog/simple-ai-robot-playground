@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ffbe813-bdd5-4f83-a514-637e0dff18fd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/agents/agentConstructor.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/agents/model-based-reflex-agent.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/agents/model-based-reflex-agent.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/map.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/map.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/map/map-agent-selector/map-agent-selector.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/map/map-agent-selector/map-agent-selector.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/map/map-agent-selector/map-agent-selector.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/map/map-agent-selector/map-agent-selector.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/map/map.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/map/map.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/map/map.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/map/map.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/map/map.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/map/map.component.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/dist/" />
@@ -88,8 +76,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/app.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="66" column="35" lean-forward="true" selection-start-line="66" selection-start-column="35" selection-end-line="67" selection-end-column="44" />
+            <state relative-caret-position="365">
+              <caret line="65" column="57" selection-start-line="65" selection-start-column="57" selection-end-line="65" selection-end-column="57" />
               <folding>
                 <element signature="e#0#75#0" expanded="true" />
               </folding>
@@ -346,12 +334,12 @@
       <option name="presentableId" value="Default" />
       <updated>1571254537496</updated>
       <workItem from="1571254538829" duration="19696000" />
-      <workItem from="1571681509725" duration="8471000" />
+      <workItem from="1571681509725" duration="8837000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28167000" />
+    <option name="totallyTimeSpent" value="28533000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1035" extended-state="6" />
@@ -619,8 +607,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/app.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="66" column="35" lean-forward="true" selection-start-line="66" selection-start-column="35" selection-end-line="67" selection-end-column="44" />
+        <state relative-caret-position="365">
+          <caret line="65" column="57" selection-start-line="65" selection-start-column="57" selection-end-line="65" selection-end-column="57" />
           <folding>
             <element signature="e#0#75#0" expanded="true" />
           </folding>

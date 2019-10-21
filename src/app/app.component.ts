@@ -63,7 +63,7 @@ export class AppComponent implements OnInit {
 
   runExperiments() {
     const trashChances = [2, 5, 10, 15, 20];
-    const simulationLengths = [100, 500, 1000];
+    const simulationLengths = [100, 500, 1000, 2000, 4000];
     // const trashChances = [2, 5];
     // const simulationLengths = [100, 500];
 
